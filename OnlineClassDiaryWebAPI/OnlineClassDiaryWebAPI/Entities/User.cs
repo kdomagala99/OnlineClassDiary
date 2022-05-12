@@ -1,0 +1,20 @@
+﻿namespace OnlineClassDiaryWebAPI.Entities
+{
+    public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string PESEL { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
+        public int Role_Id { get; set; }
+        public virtual Role Role { get; set; }
+#nullable enable
+        public int? Class_Id { get; set; }
+        public int? Child_Id { get; set; }
+        public virtual Class? Class { get; set; }
+        public virtual User? Child { get; set; }
+#nullable disable
+    }
+}

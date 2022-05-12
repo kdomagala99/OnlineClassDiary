@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OnlineClassDiaryWebAPI.Database.OnlineClassDiaryDbContext">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGCAAAEAAAAEIAAAAAAAEgAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Database\OnlineClassDiaryDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.AttendanceDto">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAEQAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\AttendanceDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.ClassDto">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Dtos\ClassDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.GradeDto">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAQAAgAAAAIIAAAAQAAAAAAAABAAAgAAAAAAA=</HashCode>
+      <FileName>Dtos\GradeDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.RoleDto">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\RoleDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.SemesterDto">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAACAAAAAA=</HashCode>
+      <FileName>Dtos\SemesterDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.StatusDto">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\StatusDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.SubjectDto">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\SubjectDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Dtos.UserDto">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAIAAEAIAAAQABAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dtos\UserDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Attendance">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGCAIAEQAAAAAAAAAAAAAAAAAAAAABBAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Attendance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Class">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Entities\Class.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Grade">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAIAAAEAgAAAAIIAAAAQAAAAAAAABAAAgAAAAAAA=</HashCode>
+      <FileName>Entities\Grade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Role">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Semester">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAACAAAAAA=</HashCode>
+      <FileName>Entities\Semester.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Status">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.Subject">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Subject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineClassDiaryWebAPI.Entities.User">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAACAAAIAQEAIAAAQABAAAEAAAAEAAAAIAAAA=</HashCode>
+      <FileName>Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
