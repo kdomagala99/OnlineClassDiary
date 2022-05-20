@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Services;
+using OnlineClassDiaryWebAPI.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,9 @@ namespace OnlineClassDiaryWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineClassDiaryWebAPI", Version = "v1" });
             });
+
+            services.AddScoped<IUserService, UserService>();
+
             services.AddDbContext<OnlineClassDiaryDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("OCDConnectionString")));
         }
