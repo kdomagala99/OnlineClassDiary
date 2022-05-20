@@ -37,6 +37,13 @@ namespace OnlineClassDiaryWebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineClassDiaryWebAPI", Version = "v1" });
             });
 
+            services.AddScoped<IAttendanceService, AttendanceService>();
+            services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ISemesterService, SemesterService>();
+            services.AddScoped<IStatusService, StatusService>();
+            services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<IUserService, UserService>();
 
             services.AddDbContext<OnlineClassDiaryDbContext>

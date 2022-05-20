@@ -3,29 +3,29 @@ using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
-    public class UserService : IUserService
+    public class SubjectService : ISubjectService
     {
-        public UserDto CreateUser(UserDto userDto)
+        public SubjectDto CreateSubject(SubjectDto subjectDto)
         {
             throw new System.NotImplementedException();
         }
 
-        public UserDto DeleteUser(string username)
+        public SubjectDto DeleteSubject(string subjectname)
         {
             throw new System.NotImplementedException();
         }
 
-        public UserDto EditUser(string username, UserDto userDto)
+        public SubjectDto EditSubject(string subjectname, SubjectDto subjectDto)
         {
             throw new System.NotImplementedException();
         }
 
-        public UserDto GetUser(string username)
+        public SubjectDto GetSubject(string subjectname)
         {
             throw new System.NotImplementedException();
         }
 
-        public UserDto GetUsers()
+        public SubjectDto GetSubjects()
         {
             throw new System.NotImplementedException();
         }
