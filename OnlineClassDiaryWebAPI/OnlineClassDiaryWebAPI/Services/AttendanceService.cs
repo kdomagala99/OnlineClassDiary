@@ -3,7 +3,7 @@ using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
-    public class AttendaceService : IAttendanceService
+    public class AttendanceService : IAttendanceService
     {
         public AttendanceDto CreateAttendance(AttendanceDto attendanceDto)
         {
