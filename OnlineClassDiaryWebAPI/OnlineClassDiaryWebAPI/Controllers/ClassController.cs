@@ -26,22 +26,22 @@ namespace OnlineClassDiaryWebAPI.Controllers
         [HttpPut("editclass/{id}")]
         public ActionResult EditClass([FromQuery] int id, [FromBody] ClassDto classDto)
         {
-            var result = _classService.EditClass(id, classDto);
-            return Ok(result);
+            _classService.EditClass(id, classDto);
+            return Ok();
         }
 
         [HttpPost("createclass")]
         public ActionResult CreateClass([FromBody] ClassDto classDto)
         {
-            var result = _classService.CreateClass(classDto);
-            return Ok(result);
+            _classService.CreateClass(classDto);
+            return Ok();
         }
 
         [HttpDelete("deleteclass/{id}")]
         public ActionResult DeleteClass([FromQuery] int id)
         {
-            var result = _classService.DeleteClass(id);
-            return Ok(result);
+            _classService.DeleteClass(id);
+            return Ok();
         }
     }
 }
