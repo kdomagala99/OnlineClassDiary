@@ -24,7 +24,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getuser/{username}")]
+        [HttpGet("getuser/{email}")]
         public ActionResult GetUser(string email)
         {
             var result = _userService.GetUser(email);

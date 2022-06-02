@@ -22,24 +22,12 @@ namespace OnlineClassDiaryWebAPI.Database
             modelBuilder.Entity<Attendance>()
                 .Property(a => a.Date)
                 .IsRequired();
-            modelBuilder.Entity<Attendance>()
-                .Property(a => a.Student_Id)
-                .IsRequired();
-            modelBuilder.Entity<Attendance>()
-                .Property(a => a.Teacher_Id)
-                .IsRequired();
-            modelBuilder.Entity<Attendance>()
-                .Property(a => a.Student_Id)
-                .IsRequired();
 
             //class
             modelBuilder.Entity<Class>()
                 .Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(50);
-            modelBuilder.Entity<Class>()
-                .Property(c => c.Teacher_Id)
-                .IsRequired();
 
             //grade
             modelBuilder.Entity<Grade>()
@@ -50,19 +38,7 @@ namespace OnlineClassDiaryWebAPI.Database
                 .Property(g => g.Value)
                 .IsRequired();
             modelBuilder.Entity<Grade>()
-                .Property(g => g.Student_Id)
-                .IsRequired();
-            modelBuilder.Entity<Grade>()
-                .Property(g => g.Teacher_Id)
-                .IsRequired();
-            modelBuilder.Entity<Grade>()
                 .Property(g => g.Date)
-                .IsRequired();
-            modelBuilder.Entity<Grade>()
-                .Property(g => g.Subject_Id)
-                .IsRequired();
-            modelBuilder.Entity<Grade>()
-                .Property(g => g.Semester_Id)
                 .IsRequired();
 
             //role
@@ -103,6 +79,9 @@ namespace OnlineClassDiaryWebAPI.Database
             modelBuilder.Entity<User>()
                 .Property(u => u.PESEL)
                 .IsRequired();
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Class)
+                .WithMany(u => u.Students_List);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

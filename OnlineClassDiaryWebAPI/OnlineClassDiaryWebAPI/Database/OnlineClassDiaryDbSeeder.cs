@@ -70,7 +70,6 @@ namespace OnlineClassDiaryWebAPI.Database
                     PESEL = "80111902845",
                     Email = "admin@example.com",
                     PasswordHash = "admin1",
-                    Role_Id = _dbContext.Roles.Where(r => r.Name.Equals("Administrator")).FirstOrDefault().Id,
                     Role = _dbContext.Roles.Where(r => r.Name.Equals("Administrator")).FirstOrDefault()
                 }
             };

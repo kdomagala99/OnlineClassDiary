@@ -1,5 +1,6 @@
 ﻿using OnlineClassDiaryWebAPI.Dtos;
 using OnlineClassDiaryWebAPI.Entities;
+using System.Collections.Generic;
 
 namespace OnlineClassDiaryWebAPI.Services.Interfaces
 {
@@ -9,6 +10,6 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
         public void EditUser(User user);
         public void DeleteUser(string email);
         public UserDto GetUser(string email);
-        public UserDto GetUsers();
+        public List<UserDto> GetUsers();
     }
 }
