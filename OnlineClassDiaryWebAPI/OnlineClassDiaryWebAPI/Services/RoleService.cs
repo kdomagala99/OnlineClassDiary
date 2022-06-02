@@ -1,28 +1,50 @@
-﻿using OnlineClassDiaryWebAPI.Dtos;
+﻿using AutoMapper;
+using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class RoleService : IRoleService
     {
-        public RoleDto CreateRole(RoleDto roleDto)
+        private readonly OnlineClassDiaryDbContext _dbContext;
+        private readonly IMapper _mapper;
+        public RoleService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
+            _mapper = mapper;   
+        }
+        public void CreateRole(RoleDto roleDto)
+        {
+            var role = _mapper.Map<Role>(roleDto);
+            _dbContext.Roles.Add(role);
+            _dbContext.SaveChanges();
         }
 
-        public RoleDto DeleteRole(int id)
+        public void DeleteRole(string name)
         {
-            throw new System.NotImplementedException();
+            var role = _dbContext.Roles.FirstOrDefault(r => r.Name.Equals(name));
+            if (role == null)
+                return;
+            _dbContext.Roles.Remove(role);
+            _dbContext.SaveChanges();
         }
 
-        public RoleDto EditRole(int id, RoleDto roleDto)
+        public void EditRole(string name, RoleDto roleDto)
         {
-            throw new System.NotImplementedException();
+            var role = _dbContext.Roles.FirstOrDefault(r => r.Name.Equals(name));
+            if (role!=null)
+                role.Name = roleDto.Name;
         }
 
-        public RoleDto GetRole(int id)
+        public RoleDto GetRole(string name)
         {
-            throw new System.NotImplementedException();
+            var role = _dbContext.Roles.FirstOrDefault(r => r.Name.Equals(name));
+            if (role == null)
+                throw new System.NotImplementedException();
+            return _mapper.Map<RoleDto>(role);
         }
     }
 }

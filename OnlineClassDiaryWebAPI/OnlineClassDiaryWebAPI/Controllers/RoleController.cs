@@ -16,32 +16,32 @@ namespace OnlineClassDiaryWebAPI.Controllers
             _roleService = roleService;
         }
 
-        [HttpGet("getrole/{id}")]
-        public ActionResult GetRole(int id)
+        [HttpGet("getrole/{name}")]
+        public ActionResult GetRole(string name)
         {
-            var result = _roleService.GetRole(id);
+            var result = _roleService.GetRole(name);
             return Ok(result);
         }
 
-        [HttpPut("editrole/{id}")]
-        public ActionResult EditRole([FromQuery] int id, [FromBody] RoleDto roleDto)
+        [HttpPut("editrole/{name}")]
+        public ActionResult EditRole(string name, [FromBody] RoleDto roleDto)
         {
-            var result = _roleService.EditRole(id, roleDto);
-            return Ok(result);
+            _roleService.EditRole(name, roleDto);
+            return Ok();
         }
 
         [HttpPost("createrole")]
         public ActionResult CreateRole([FromBody] RoleDto roleDto)
         {
-            var result = _roleService.CreateRole(roleDto);
-            return Ok(result);
+            _roleService.CreateRole(roleDto);
+            return Ok();
         }
 
-        [HttpDelete("deleterole/{id}")]
-        public ActionResult DeleteRole([FromQuery] int id)
+        [HttpDelete("deleterole/{name}")]
+        public ActionResult DeleteRole(string name)
         {
-            var result = _roleService.DeleteRole(id);
-            return Ok(result);
+            _roleService.DeleteRole(name);
+            return Ok();
         }
     }
 }
