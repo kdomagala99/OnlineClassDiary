@@ -5,9 +5,9 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
     public interface IGradeService
     {
         public GradeDto GetGrade(int id);
-        public GradeDto EditGrade(int id, GradeDto gradeDto);
-        public GradeDto CreateGrade(GradeDto gradeDto);
-        public GradeDto DeleteGrade(int id);
+        public void EditGrade(int id, GradeDto gradeDto);
+        public void CreateGrade(GradeDto gradeDto);
+        public void DeleteGrade(int id);
         
     }
 }

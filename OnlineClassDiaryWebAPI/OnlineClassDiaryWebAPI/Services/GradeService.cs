@@ -1,28 +1,57 @@
-﻿using OnlineClassDiaryWebAPI.Dtos;
+﻿using AutoMapper;
+using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class GradeService : IGradeService
     {
-        public GradeDto CreateGrade(GradeDto gradeDto)
+        private readonly OnlineClassDiaryDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public GradeService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public GradeDto DeleteGrade(int id)
+        public void CreateGrade(GradeDto gradeDto)
         {
-            throw new System.NotImplementedException();
+            var grade = _mapper.Map<Grade>(gradeDto);
+            _dbContext.Grades.Add(grade);
+            _dbContext.SaveChanges();
         }
 
-        public GradeDto EditGrade(int id, GradeDto gradeDto)
+        public void DeleteGrade(int id)
         {
-            throw new System.NotImplementedException();
+            var grade = _dbContext.Grades.FirstOrDefault(c => c.Id == id);
+            if (grade != null)
+            {
+                _dbContext.Grades.Remove(grade);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void EditGrade(int id, GradeDto gradeDto)
+        {
+            var grade = _dbContext.Grades.FirstOrDefault(x => x.Id.Equals(id));
+            grade.Value = gradeDto.Value;
+
+            _dbContext.SaveChanges();
         }
 
         public GradeDto GetGrade(int id)
         {
-            throw new System.NotImplementedException();
+            var gradeDb = _dbContext.Grades.FirstOrDefault(a => a.Id.Equals(id));
+            if (gradeDb == null)
+                throw new System.NotImplementedException();
+
+            var gradeDto = _mapper.Map<GradeDto>(gradeDb);
+            return gradeDto;
         }
     }
 }

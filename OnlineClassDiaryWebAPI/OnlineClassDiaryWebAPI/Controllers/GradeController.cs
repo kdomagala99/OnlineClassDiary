@@ -26,22 +26,22 @@ namespace OnlineClassDiaryWebAPI.Controllers
         [HttpPut("editgrade/{id}")]
         public ActionResult EditGrade(int id, [FromBody] GradeDto gradeDto)
         {
-            var result = _gradeService.EditGrade(id, gradeDto);
-            return Ok(result);
+            _gradeService.EditGrade(id, gradeDto);
+            return Ok();
         }
 
         [HttpPost("creategrade")]
         public ActionResult CreateGrade([FromBody] GradeDto gradeDto)
         {
-            var result = _gradeService.CreateGrade(gradeDto);
-            return Ok(result);
+            _gradeService.CreateGrade(gradeDto);
+            return Ok();
         }
 
         [HttpDelete("deletegrade/{id}")]
         public ActionResult DeleteGrade(int id)
         {
-            var result = _gradeService.DeleteGrade(id);
-            return Ok(result);
+            _gradeService.DeleteGrade(id);
+            return Ok();
         }
     }
 }
