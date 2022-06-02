@@ -1,7 +1,9 @@
-﻿using OnlineClassDiaryWebAPI.Database;
+﻿using AutoMapper;
+using OnlineClassDiaryWebAPI.Database;
 using OnlineClassDiaryWebAPI.Dtos;
 using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
@@ -9,19 +11,17 @@ namespace OnlineClassDiaryWebAPI.Services
     public class SubjectService : ISubjectService
     {
         private readonly OnlineClassDiaryDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public SubjectService(OnlineClassDiaryDbContext dbContext)
+        public SubjectService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper; 
         }
 
         public void CreateSubject(SubjectDto subjectDto)
         {
-            var subject = new Subject()
-            {
-                Name = subjectDto.Name,
-                Description = subjectDto.Description
-            };
+            var subject = _mapper.Map<Subject>(subjectDto);
 
             _dbContext.Subjects.Add(subject);
             _dbContext.SaveChanges();
@@ -47,19 +47,18 @@ namespace OnlineClassDiaryWebAPI.Services
 
         public SubjectDto GetSubject(string subjectname)
         {
-            var subjectDto = new SubjectDto();
             var subjectDb = _dbContext.Subjects.FirstOrDefault(s => s.Name.Equals(subjectname));
             if(subjectDb == null)
                 throw new System.NotImplementedException();
 
-            subjectDto.Name = subjectDb.Name;
-
+            var subjectDto = _mapper.Map<SubjectDto>(subjectDb);
             return subjectDto;
         }
 
-        public SubjectDto GetSubjects()
+        public List<SubjectDto> GetSubjects()
         {
-            throw new System.NotImplementedException();
+            var subjects = _mapper.Map<List<SubjectDto>>(_dbContext.Subjects.ToList());
+            return subjects;
         }
     }
 }
