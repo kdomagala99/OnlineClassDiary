@@ -1,28 +1,60 @@
-﻿using OnlineClassDiaryWebAPI.Dtos;
+﻿using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class SubjectService : ISubjectService
     {
-        public SubjectDto CreateSubject(SubjectDto subjectDto)
+        private readonly OnlineClassDiaryDbContext _dbContext;
+
+        public SubjectService(OnlineClassDiaryDbContext dbContext)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public SubjectDto DeleteSubject(string subjectname)
+        public void CreateSubject(SubjectDto subjectDto)
         {
-            throw new System.NotImplementedException();
+            var subject = new Subject()
+            {
+                Name = subjectDto.Name,
+                Description = subjectDto.Description
+            };
+
+            _dbContext.Subjects.Add(subject);
+            _dbContext.SaveChanges();
         }
 
-        public SubjectDto EditSubject(string subjectname, SubjectDto subjectDto)
+        public void DeleteSubject(string subjectname)
         {
-            throw new System.NotImplementedException();
+            var subject = _dbContext.Subjects.FirstOrDefault(s => s.Name.Equals(subjectname));
+            if(subject != null)
+            {
+                _dbContext.Subjects.Remove(subject);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void EditSubject(string subjectname, SubjectDto subjectDto)
+        {
+            var subjectDb = _dbContext.Subjects.FirstOrDefault(s => s.Name.Equals(subjectname));
+            subjectDb.Name = subjectDto.Name;
+
+            _dbContext.SaveChanges();
         }
 
         public SubjectDto GetSubject(string subjectname)
         {
-            throw new System.NotImplementedException();
+            var subjectDto = new SubjectDto();
+            var subjectDb = _dbContext.Subjects.FirstOrDefault(s => s.Name.Equals(subjectname));
+            if(subjectDb == null)
+                throw new System.NotImplementedException();
+
+            subjectDto.Name = subjectDb.Name;
+
+            return subjectDto;
         }
 
         public SubjectDto GetSubjects()

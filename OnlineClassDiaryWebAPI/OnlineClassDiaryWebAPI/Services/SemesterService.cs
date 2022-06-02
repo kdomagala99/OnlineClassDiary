@@ -1,33 +1,65 @@
-﻿using OnlineClassDiaryWebAPI.Dtos;
+﻿using AutoMapper;
+using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class SemesterService : ISemesterService
     {
-        public SemesterDto CreateSemester(SemesterDto semesterDto)
+        private readonly OnlineClassDiaryDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public SemesterService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public SemesterDto DeleteSemester(int semesterId)
+        public void CreateSemester(SemesterDto semesterDto)
         {
-            throw new System.NotImplementedException();
+            var semester = _mapper.Map<Semester>(semesterDto);
+           
+            _dbContext.Semesters.Add(semester);
+            _dbContext.SaveChanges();
         }
 
-        public SemesterDto EditSemester(int semesterId, SemesterDto semesterDto)
+        public void DeleteSemester(int semesterId)
         {
-            throw new System.NotImplementedException();
+            var semester = _dbContext.Semesters.FirstOrDefault(s => s.Id.Equals(semesterId));
+            if(semester != null)
+            {
+                _dbContext.Semesters.Remove(semester);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void EditSemester(int semesterId, SemesterDto semesterDto)
+        {
+            var semesterDb = _dbContext.Semesters.FirstOrDefault(s => s.Id.Equals(semesterId));
+            semesterDb.Date_Begin = semesterDto.Date_Begin;
+            semesterDb.Date_End = semesterDto.Date_End;
+
+            _dbContext.SaveChanges();
         }
 
         public SemesterDto GetSemester(int semesterId)
-        {
-            throw new System.NotImplementedException();
+        {  
+            var semesterDb = _dbContext.Semesters.FirstOrDefault(s => s.Id.Equals(semesterId));
+            if(semesterDb == null)
+                throw new System.NotImplementedException();
+
+            var semesterDto = _mapper.Map<SemesterDto>(semesterDb);
+            return semesterDto;
         }
 
-        public SemesterDto GetSemesters()
+        public List<SemesterDto> GetSemesters()
         {
-            throw new System.NotImplementedException();
+            var semesters = _mapper.Map<List<SemesterDto>>(_dbContext.Semesters.ToList());
+            return semesters;
         }
     }
 }

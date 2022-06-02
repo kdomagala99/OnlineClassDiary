@@ -17,17 +17,17 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpGet("getstatus/{statusId}")]
-        public ActionResult GetStatus(int statusId)
+        public ActionResult GetStatus(string statusname)
         {
-            var result  = _statusService.GetStatus(statusId);
+            var result  = _statusService.GetStatus(statusname);
             return Ok(result);
         }
 
         [HttpPut("editstatus/{statusId}")]
-        public ActionResult EditStatus([FromQuery]int statusId, [FromBody] StatusDto statusDto)
+        public ActionResult EditStatus([FromQuery]string statusname, [FromBody] StatusDto statusDto)
         {
-            var result = _statusService.EditStatus(statusId, statusDto);
-            return Ok(result);
+            _statusService.EditStatus(statusname, statusDto);
+            return Ok();
         }
     }
 }

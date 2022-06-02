@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Controllers
@@ -33,22 +34,22 @@ namespace OnlineClassDiaryWebAPI.Controllers
         [HttpPost("createsemester")]
         public ActionResult CreateSemester([FromBody] SemesterDto semesterDto)
         {
-            var result = _semesterService.CreateSemester(semesterDto);
-            return Ok(result);
+            _semesterService.CreateSemester(semesterDto);
+            return Ok();
         }
 
         [HttpPut("editsemester/{semesterId}")]
-        public ActionResult EditSemester([FromQuery]int semesterId, [FromBody] SemesterDto semesterDto)
+        public ActionResult EditSemester(int semesterId, [FromBody] SemesterDto semesterDto)
         {
-            var result = _semesterService.EditSemester(semesterId, semesterDto);
-            return Ok(result);
+            _semesterService.EditSemester(semesterId, semesterDto);
+            return Ok();
         }
 
         [HttpDelete("deletesemester/{semesterId}")]
         public ActionResult DeleteSemester([FromQuery]int semesterId)
         {
-            var result = _semesterService.DeleteSemester(semesterId);
-            return Ok(result);
+            _semesterService.DeleteSemester(semesterId);
+            return Ok();
         }
     }
 }

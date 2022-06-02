@@ -33,22 +33,22 @@ namespace OnlineClassDiaryWebAPI.Controllers
         [HttpPost("createsubject")]
         public ActionResult CreateSubject([FromBody] SubjectDto subjectDto)
         {
-            var result = _subjectService.CreateSubject(subjectDto);
-            return Ok(result);
+            _subjectService.CreateSubject(subjectDto);
+            return Ok();
         }
 
         [HttpPut("editsubject/{subjectname}")]
         public ActionResult EditSubject([FromQuery]string subjectname, [FromBody]SubjectDto subjectDto)
         {
-            var result = _subjectService.EditSubject(subjectname, subjectDto);
-            return Ok(result);
+            _subjectService.EditSubject(subjectname, subjectDto);
+            return Ok();
         }
 
         [HttpDelete("deletesubject/{subjectname}")]
         public ActionResult DeleteSubject([FromQuery]string subjectname)
         {
-            var result = _subjectService.DeleteSubject(subjectname);
-            return Ok(result);
+            _subjectService.DeleteSubject(subjectname);
+            return Ok();
         }
     }
 }
