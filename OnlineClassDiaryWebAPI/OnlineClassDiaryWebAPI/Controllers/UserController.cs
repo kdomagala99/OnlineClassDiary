@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Controllers
@@ -24,30 +25,30 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpGet("getuser/{username}")]
-        public ActionResult GetUser(string username)
+        public ActionResult GetUser(string email)
         {
-            var result = _userService.GetUser(username);
+            var result = _userService.GetUser(email);
             return Ok(result);
         }
 
         [HttpPost("createuser")]
-        public ActionResult CreateUser([FromBody] UserDto userDto)
+        public ActionResult CreateUser([FromBody] User userDto)
         {
-            var result = _userService.CreateUser(userDto);
-            return Ok(result);
+            _userService.CreateUser(userDto);
+            return Ok();
         }
 
-        [HttpPut("edituser/{username}")]
-        public ActionResult EditUser([FromQuery]string username, [FromBody] UserDto userDto)
+        [HttpPut("edituser")]
+        public ActionResult EditUser([FromBody] User user)
         {
-            var result = _userService.EditUser(username, userDto);
-            return Ok(result);
+            _userService.EditUser(user);
+            return Ok();
         }
 
         [HttpDelete("deleteuser/{username}")]
-        public ActionResult DeleteUser([FromQuery]string username)
+        public ActionResult DeleteUser([FromQuery] string email)
         {
-            var result = _userService.DeleteUser(username);
+            _userService.DeleteUser(email);
             return Ok();
         }
     }
