@@ -5,7 +5,7 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
     public interface IAttendanceService
     {
         public AttendanceDto GetAttendance(int id);
-        public AttendanceDto CreateAttendance(AttendanceDto attendanceDto);
-        public AttendanceDto EditAttendance(int id, AttendanceDto attendanceDto);
+        public void CreateAttendance(AttendanceDto attendanceDto);
+        public void EditAttendance(int id, AttendanceDto attendanceDto);
     }
 }

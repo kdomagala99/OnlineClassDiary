@@ -26,15 +26,15 @@ namespace OnlineClassDiaryWebAPI.Controllers
         [HttpPut("editattendance/{id}")]
         public ActionResult EditAttendance([FromQuery] int id, [FromBody] AttendanceDto attendanceDto)
         {
-            var result = _attendanceService.EditAttendance(id, attendanceDto);
-            return Ok(result);
+            _attendanceService.EditAttendance(id, attendanceDto);
+            return Ok();
         }
 
         [HttpPost("createattendance")]
         public ActionResult CreateAttendance([FromBody] AttendanceDto attendanceDto)
         {
-            var result = _attendanceService.CreateAttendance(attendanceDto);
-            return Ok(result);
+            _attendanceService.CreateAttendance(attendanceDto);
+            return Ok();
         }
     }
 }
