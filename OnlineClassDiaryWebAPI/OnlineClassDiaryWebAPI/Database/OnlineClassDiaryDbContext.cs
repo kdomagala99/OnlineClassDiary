@@ -5,10 +5,8 @@ namespace OnlineClassDiaryWebAPI.Database
 {
     public class OnlineClassDiaryDbContext : DbContext
     {
-        public OnlineClassDiaryDbContext(DbContextOptions<OnlineClassDiaryDbContext> options) : base(options)
-        {
+        private readonly string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=OnlineClassDiaryDb;Trusted_Connection=True;";
 
-        }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Grade> Grades { get; set; }
@@ -18,7 +16,7 @@ namespace OnlineClassDiaryWebAPI.Database
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //attendance
             modelBuilder.Entity<Attendance>()
@@ -105,6 +103,10 @@ namespace OnlineClassDiaryWebAPI.Database
             modelBuilder.Entity<User>()
                 .Property(u => u.PESEL)
                 .IsRequired();
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }

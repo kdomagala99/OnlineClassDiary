@@ -45,14 +45,15 @@ namespace OnlineClassDiaryWebAPI
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddDbContext<OnlineClassDiaryDbContext>();
+            services.AddScoped<OnlineClassDiaryDbSeeder>();
 
-            services.AddDbContext<OnlineClassDiaryDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("OCDConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, OnlineClassDiaryDbSeeder seeder)
         {
+            seeder.Seed();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,7 +65,7 @@ namespace OnlineClassDiaryWebAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
