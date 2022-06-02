@@ -1,18 +1,40 @@
-﻿using OnlineClassDiaryWebAPI.Dtos;
+﻿using AutoMapper;
+using OnlineClassDiaryWebAPI.Database;
+using OnlineClassDiaryWebAPI.Dtos;
+using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class StatusService : IStatusService
     {
-        public StatusDto EditStatus(int id, StatusDto statusDto)
+        private readonly OnlineClassDiaryDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public StatusService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public StatusDto GetStatus(int id)
+        public void EditStatus(string statusname, StatusDto statusDto)
         {
-            throw new System.NotImplementedException();
+            var statusDb = _dbContext.Statuses.FirstOrDefault(s => s.Name.Equals(statusname));
+            statusDb.Name = statusDto.Name;
+
+            _dbContext.SaveChanges();
+        }
+
+        public StatusDto GetStatus(string statusname)
+        {
+            var statusDb = _dbContext.Statuses.FirstOrDefault(s => s.Name.Equals(statusname));
+            if(statusDb == null)
+                throw new System.NotImplementedException();
+
+            var statusDto = _mapper.Map<StatusDto>(statusDb);
+
+            return statusDto;
         }
     }
 }
