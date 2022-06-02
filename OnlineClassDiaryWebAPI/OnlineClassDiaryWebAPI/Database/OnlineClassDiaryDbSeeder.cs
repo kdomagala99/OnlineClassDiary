@@ -26,6 +26,13 @@ namespace OnlineClassDiaryWebAPI.Database
                 _dbContext.Roles.AddRange(roles);
                 _dbContext.SaveChanges();
             }
+
+            if (!_dbContext.Users.Any())
+            {
+                var users = GetUsers();
+                _dbContext.Users.AddRange(users);
+                _dbContext.SaveChanges();
+            }
         }
 
         private IEnumerable<Role> GetRoles()
@@ -50,6 +57,25 @@ namespace OnlineClassDiaryWebAPI.Database
                 }
             };
             return roles;
+        }
+
+        private IEnumerable<User> GetUsers()
+        {
+            var users = new List<User>()
+            {
+                new User()
+                {
+                    Name = "AdminName",
+                    Surname = "AdminSurname",
+                    PESEL = "80111902845",
+                    Email = "admin@example.com",
+                    PasswordHash = "admin1",
+                    Role_Id = _dbContext.Roles.Where(r => r.Name.Equals("Administrator")).FirstOrDefault().Id,
+                    Role = _dbContext.Roles.Where(r => r.Name.Equals("Administrator")).FirstOrDefault()
+                }
+            };
+
+            return users;
         }
     }
 }
