@@ -24,7 +24,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPut("editgrade/{id}")]
-        public ActionResult EditGrade([FromQuery] int id, [FromBody] GradeDto gradeDto)
+        public ActionResult EditGrade(int id, [FromBody] GradeDto gradeDto)
         {
             var result = _gradeService.EditGrade(id, gradeDto);
             return Ok(result);
@@ -38,7 +38,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpDelete("deletegrade/{id}")]
-        public ActionResult DeleteGrade([FromQuery] int id)
+        public ActionResult DeleteGrade(int id)
         {
             var result = _gradeService.DeleteGrade(id);
             return Ok(result);

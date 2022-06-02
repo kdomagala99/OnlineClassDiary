@@ -24,7 +24,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPut("editattendance/{id}")]
-        public ActionResult EditAttendance([FromQuery] int id, [FromBody] AttendanceDto attendanceDto)
+        public ActionResult EditAttendance(int id, [FromBody] AttendanceDto attendanceDto)
         {
             _attendanceService.EditAttendance(id, attendanceDto);
             return Ok();
