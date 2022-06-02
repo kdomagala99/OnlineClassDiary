@@ -1,6 +1,14 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const goMainPage = (e) => {
+    e.preventDefault();
+    return navigate("/login/diary");
+  };
+
   return (
     <Wrapper>
       <Form>
@@ -19,7 +27,7 @@ const LoginPage = () => {
             </Label>
           </div>
         </DataFields>
-        <button>Login</button>
+        <button onClick={goMainPage}>Login</button>
       </Form>
     </Wrapper>
   );
