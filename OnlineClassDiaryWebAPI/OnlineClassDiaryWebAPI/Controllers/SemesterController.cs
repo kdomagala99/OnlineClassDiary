@@ -46,7 +46,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpDelete("deletesemester/{semesterId}")]
-        public ActionResult DeleteSemester([FromQuery]int semesterId)
+        public ActionResult DeleteSemester(int semesterId)
         {
             _semesterService.DeleteSemester(semesterId);
             return Ok();

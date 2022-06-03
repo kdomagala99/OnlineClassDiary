@@ -48,37 +48,6 @@ namespace OnlineClassDiaryWebAPI.Services
             var userDb = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
             if (userDb == null)
                 throw new System.NotImplementedException();
-
-            //userDto.Name = userDb.Name;
-            //userDto.Email = userDb.Email;
-            //userDto.Surname = userDb.Surname;
-            //userDto.PESEL = userDb.PESEL;
-            //userDto.Role = new RoleDto() { Name = userDb.Role.Name };
-            //if (userDb.Class != null)
-            //{
-            //    userDto.Class = new ClassDto()
-            //    {
-            //        Name = userDb.Class.Name,
-            //        Description = userDb.Class.Description,
-            //        Students_List = new List<UserDto>()
-            //        {
-
-            //        }
-            //    };
-            //}
-
-            //if (userDb.Child != null)
-            //{
-            //    userDto.Child = new UserDto()
-            //    {
-            //        Name = userDb.Child.Name,
-            //        Email = userDb.Child.Email,
-            //        Surname = userDb.Child.Surname,
-            //        PESEL = userDb.Child.PESEL,
-            //        Role = new RoleDto() { Name = userDb.Child.Role.Name }
-
-            //    };
-            //}
             userDto = _mapper.Map<UserDto>(userDb);
             return userDto;
         }

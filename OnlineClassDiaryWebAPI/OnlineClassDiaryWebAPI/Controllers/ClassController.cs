@@ -38,7 +38,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpDelete("deleteclass/{id}")]
-        public ActionResult DeleteClass([FromQuery] int id)
+        public ActionResult DeleteClass(int id)
         {
             _classService.DeleteClass(id);
             return Ok();

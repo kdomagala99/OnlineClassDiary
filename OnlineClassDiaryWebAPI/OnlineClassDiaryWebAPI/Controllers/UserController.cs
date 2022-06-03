@@ -39,14 +39,14 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPut("edituser")]
-        public ActionResult EditUser([FromBody] User user)
+        public ActionResult EditUser([FromBody]User user)
         {
             _userService.EditUser(user);
             return Ok();
         }
 
-        [HttpDelete("deleteuser/{username}")]
-        public ActionResult DeleteUser([FromQuery] string email)
+        [HttpDelete("deleteuser/{email}")]
+        public ActionResult DeleteUser(string email)
         {
             _userService.DeleteUser(email);
             return Ok();

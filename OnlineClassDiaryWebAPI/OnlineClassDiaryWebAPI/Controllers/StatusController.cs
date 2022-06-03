@@ -24,7 +24,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPut("editstatus/{statusId}")]
-        public ActionResult EditStatus([FromQuery]string statusname, [FromBody] StatusDto statusDto)
+        public ActionResult EditStatus(string statusname, [FromBody] StatusDto statusDto)
         {
             _statusService.EditStatus(statusname, statusDto);
             return Ok();
