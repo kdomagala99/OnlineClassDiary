@@ -27,6 +27,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetSubject(string subjectname)
         {
             var result = _subjectService.GetSubject(subjectname);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

@@ -20,6 +20,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetRole(string name)
         {
             var result = _roleService.GetRole(name);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

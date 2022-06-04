@@ -20,6 +20,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetGrade(int id)
         {
             var result = _gradeService.GetGrade(id);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

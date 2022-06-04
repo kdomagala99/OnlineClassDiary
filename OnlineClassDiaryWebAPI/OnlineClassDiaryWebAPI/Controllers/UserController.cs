@@ -28,6 +28,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetUser(string email)
         {
             var result = _userService.GetUser(email);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

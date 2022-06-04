@@ -50,7 +50,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {  
             var semesterDb = _dbContext.Semesters.FirstOrDefault(s => s.Id.Equals(semesterId));
             if(semesterDb == null)
-                throw new System.NotImplementedException();
+                return null;
 
             var semesterDto = _mapper.Map<SemesterDto>(semesterDb);
             return semesterDto;

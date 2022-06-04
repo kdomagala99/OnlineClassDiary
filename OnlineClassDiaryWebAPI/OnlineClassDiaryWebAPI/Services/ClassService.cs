@@ -52,7 +52,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {
             var classDb = _dbContext.Classes.FirstOrDefault(a => a.Id.Equals(id));
             if (classDb == null)
-                throw new System.NotImplementedException();
+                return null;
 
             var classDto = _mapper.Map<ClassDto>(classDb);
             return classDto;

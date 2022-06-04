@@ -29,8 +29,8 @@ namespace OnlineClassDiaryWebAPI.Services
         public StatusDto GetStatus(string statusname)
         {
             var statusDb = _dbContext.Statuses.FirstOrDefault(s => s.Name.Equals(statusname));
-            if(statusDb == null)
-                throw new System.NotImplementedException();
+            if (statusDb == null)
+                return null;
 
             var statusDto = _mapper.Map<StatusDto>(statusDb);
 

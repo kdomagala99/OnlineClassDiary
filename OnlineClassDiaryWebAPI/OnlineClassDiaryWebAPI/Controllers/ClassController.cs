@@ -20,6 +20,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetClass(int id)
         {
             var result = _classService.GetClass(id);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

@@ -28,6 +28,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetSemester(int semesterId)
         {
             var result = _semesterService.GetSemester(semesterId);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

@@ -38,7 +38,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {
             var attendanceDb = _dbContext.Attendances.FirstOrDefault(a => a.Id.Equals(id));
             if (attendanceDb == null)
-                throw new System.NotImplementedException();
+                return null;
 
             var attendanceDto = _mapper.Map<AttendanceDto>(attendanceDb);
             return attendanceDto;

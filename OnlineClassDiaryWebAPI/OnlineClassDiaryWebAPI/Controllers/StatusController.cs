@@ -20,6 +20,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetStatus(string statusname)
         {
             var result  = _statusService.GetStatus(statusname);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

@@ -48,7 +48,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {
             var gradeDb = _dbContext.Grades.FirstOrDefault(a => a.Id.Equals(id));
             if (gradeDb == null)
-                throw new System.NotImplementedException();
+                return null;
 
             var gradeDto = _mapper.Map<GradeDto>(gradeDb);
             return gradeDto;

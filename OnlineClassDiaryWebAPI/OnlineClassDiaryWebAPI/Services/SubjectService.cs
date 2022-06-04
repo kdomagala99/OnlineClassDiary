@@ -49,7 +49,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {
             var subjectDb = _dbContext.Subjects.FirstOrDefault(s => s.Name.Equals(subjectname));
             if(subjectDb == null)
-                throw new System.NotImplementedException();
+                return null;
 
             var subjectDto = _mapper.Map<SubjectDto>(subjectDb);
             return subjectDto;

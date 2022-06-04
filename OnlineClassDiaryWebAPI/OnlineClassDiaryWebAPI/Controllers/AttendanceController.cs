@@ -20,6 +20,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
         public ActionResult GetAttendance(int id)
         {
             var result = _attendanceService.GetAttendance(id);
+            if (result == null)
+                return NotFound();
             return Ok(result);
         }
 

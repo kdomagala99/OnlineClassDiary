@@ -47,7 +47,7 @@ namespace OnlineClassDiaryWebAPI.Services
             var userDto = new UserDto();
             var userDb = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
             if (userDb == null)
-                throw new System.NotImplementedException();
+                return null;
             userDto = _mapper.Map<UserDto>(userDb);
             return userDto;
         }

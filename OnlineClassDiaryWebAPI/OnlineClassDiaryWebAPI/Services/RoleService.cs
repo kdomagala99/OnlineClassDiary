@@ -43,7 +43,7 @@ namespace OnlineClassDiaryWebAPI.Services
         {
             var role = _dbContext.Roles.FirstOrDefault(r => r.Name.Equals(name));
             if (role == null)
-                throw new System.NotImplementedException();
+                return null;
             return _mapper.Map<RoleDto>(role);
         }
     }
