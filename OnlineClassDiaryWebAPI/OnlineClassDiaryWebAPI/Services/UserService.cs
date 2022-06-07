@@ -57,5 +57,16 @@ namespace OnlineClassDiaryWebAPI.Services
             var users = _mapper.Map<List<UserDto>>(_dbContext.Users.ToList());
             return users;
         }
+
+        public UserDto Login(string email, string password)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
+            if (user == null)
+                return null;
+            if (user.PasswordHash != password)
+                return new UserDto();
+
+            return _mapper.Map<UserDto>(user);
+        }
     }
 }

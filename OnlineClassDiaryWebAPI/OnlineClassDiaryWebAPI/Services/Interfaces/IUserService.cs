@@ -11,5 +11,6 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
         public void DeleteUser(string email);
         public UserDto GetUser(string email);
         public List<UserDto> GetUsers();
+        public UserDto Login(string email, string password);
     }
 }

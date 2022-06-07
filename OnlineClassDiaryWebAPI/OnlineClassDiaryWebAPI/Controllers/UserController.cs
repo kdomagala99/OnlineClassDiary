@@ -53,5 +53,16 @@ namespace OnlineClassDiaryWebAPI.Controllers
             _userService.DeleteUser(email);
             return Ok();
         }
+
+        [HttpGet("login")]
+        public ActionResult Login([FromHeader]string email, [FromHeader]string password)
+        {
+            var logged = _userService.Login(email, password);
+            if (logged == null)
+                return NotFound();
+            if (logged.Email.Length == 0)
+                return Accepted();
+            return Ok();
+        }
     }
 }
