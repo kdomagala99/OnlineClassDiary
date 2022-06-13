@@ -1,4 +1,5 @@
 ﻿using OnlineClassDiaryWebAPI.Dtos;
+using System.Collections.Generic;
 
 namespace OnlineClassDiaryWebAPI.Services.Interfaces
 {
@@ -8,5 +9,6 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
         public void EditRole(string name, RoleDto roleDto);
         public void CreateRole(RoleDto roleDto);
         public void DeleteRole(string name);
+        public List<RoleDto> GetRoles();
     }
 }

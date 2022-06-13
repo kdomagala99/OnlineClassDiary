@@ -45,5 +45,11 @@ namespace OnlineClassDiaryWebAPI.Controllers
             _roleService.DeleteRole(name);
             return Ok();
         }
+        [HttpGet("getroles")]
+        public ActionResult GetRoles()
+        {
+            var roles = _roleService.GetRoles();
+            return Ok(roles);
+        }
     }
 }

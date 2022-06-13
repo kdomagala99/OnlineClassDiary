@@ -3,6 +3,7 @@ using OnlineClassDiaryWebAPI.Database;
 using OnlineClassDiaryWebAPI.Dtos;
 using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
@@ -45,6 +46,12 @@ namespace OnlineClassDiaryWebAPI.Services
             if (role == null)
                 return null;
             return _mapper.Map<RoleDto>(role);
+        }
+
+        public List<RoleDto> GetRoles()
+        {
+            var roles = _dbContext.Roles.ToList();
+            return _mapper.Map<List<RoleDto>>(roles);
         }
     }
 }
