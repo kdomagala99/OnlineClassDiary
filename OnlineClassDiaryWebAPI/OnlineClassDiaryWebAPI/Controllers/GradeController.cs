@@ -26,14 +26,14 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPut("editgrade/{id}")]
-        public ActionResult EditGrade(int id, [FromBody] GradeDto gradeDto)
+        public ActionResult EditGrade(int id, [FromForm] GradeDto gradeDto)
         {
             _gradeService.EditGrade(id, gradeDto);
             return Ok();
         }
 
         [HttpPost("creategrade")]
-        public ActionResult CreateGrade([FromBody] GradeDto gradeDto)
+        public ActionResult CreateGrade([FromForm] GradeDto gradeDto)
         {
             _gradeService.CreateGrade(gradeDto);
             return Ok();
