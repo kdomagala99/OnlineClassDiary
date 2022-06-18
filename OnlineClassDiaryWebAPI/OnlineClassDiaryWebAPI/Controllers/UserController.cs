@@ -60,8 +60,8 @@ namespace OnlineClassDiaryWebAPI.Controllers
             var logged = _userService.Login(email, password);
             if (logged == null)
                 return NotFound();
-            if (logged.Email.Length == 0)
-                return Accepted();
+            if (logged.Email == null)
+                return BadRequest();
             return Ok();
         }
     }
