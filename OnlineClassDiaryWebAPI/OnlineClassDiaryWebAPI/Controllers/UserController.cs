@@ -54,7 +54,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public ActionResult Login([FromForm]string email, [FromForm]string password)
         {
             var logged = _userService.Login(email, password);
