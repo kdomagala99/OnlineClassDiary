@@ -5,7 +5,7 @@ import Context from "../../store/context";
 const AdminButton = () => {
   const ctx = useContext(Context);
   return (
-    <Button show={ctx.isVisible} onClick={ctx.footerVisibilityHandler}></Button>
+    <Button show={ctx.footer} onClick={ctx.footerVisibilityHandler}></Button>
   );
 };
 

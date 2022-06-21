@@ -1,37 +1,118 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useRef, useState, useEffect, useContext } from "react";
+import Context from "../store/context";
+import { apiService } from "../services/api/api.service";
 
 const LoginPage = () => {
+  const ctx = useContext(Context);
   const navigate = useNavigate();
 
-  const goMainPage = (e) => {
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [email, password]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    return navigate("/login/diary");
+
+    try {
+      await apiService.getUsers(email, password);
+
+      const sessionObj = {
+        email: email,
+        name: "admin",
+        surname: "admin",
+        role: "admin",
+      };
+      ctx.setTeacher(true);
+      ctx.setSession(sessionObj);
+      sessionStorage.setItem(sessionObj, JSON.stringify(sessionObj));
+      // console.log(sessionStorage.getItem(sessionObj.email));
+
+      setEmail("");
+      setPassword("");
+
+      navigate("/login/diary");
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      console.log(err.response);
+
+      errRef.current.focus();
+    }
   };
 
   return (
     <Wrapper>
-      <Form>
+      <Form onSubmit={submitHandler}>
         <h1>E - Diary</h1>
         <DataFields>
           <div>
-            <input type="text" autoComplete="off" id="username" required />
+            <input
+              type="email"
+              autoComplete="off"
+              id="username"
+              required
+              ref={userRef}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
             <Label htmlFor="username">
               <span>Username</span>
             </Label>
           </div>
           <div>
-            <input type="text" autoComplete="off" id="password" required />
+            <input
+              type="password"
+              id="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
             <Label htmlFor="password">
               <span>Password</span>
             </Label>
           </div>
         </DataFields>
-        <button onClick={goMainPage}>Login</button>
+        <Error ref={errRef} err={errMsg}>
+          {errMsg}
+        </Error>
+        <button>Login</button>
       </Form>
     </Wrapper>
   );
 };
+
+const Error = styled.p`
+  position: absolute;
+  bottom: 28%;
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  width: 80%;
+  text-align: center;
+  padding: 0.5rem;
+  transition: all 0.1s ease;
+  opacity: ${({ err }) => (err ? "1" : "0")};
+`;
 
 const Wrapper = styled.main`
   min-height: 100vh;
@@ -42,6 +123,7 @@ const Wrapper = styled.main`
 `;
 
 const Form = styled.form`
+  position: relative;
   width: 25rem;
   height: 40rem;
   background: rgb(255, 255, 255);

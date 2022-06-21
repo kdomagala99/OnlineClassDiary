@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import Context from "../../store/context";
+import { useContext } from "react";
+import TableRow from "./TableRow";
 
 const TheTable = () => {
+  const ctx = useContext(Context);
   return (
     <Table>
       <thead>
@@ -20,33 +24,9 @@ const TheTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-        </tr>
+        {ctx.storedSubjects.map((item) => {
+          return <TableRow name={item.name} />;
+        })}
       </tbody>
     </Table>
   );

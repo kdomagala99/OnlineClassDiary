@@ -8,15 +8,16 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
     }
 
-    body{
+    body, html, #root{
         background-color: rgb(247, 240, 231);
-    }
-
-    body,html{
+        min-height: 100vh;
         overflow: hidden;
     }
 
-
+    #root{
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 export default GlobalStyles;

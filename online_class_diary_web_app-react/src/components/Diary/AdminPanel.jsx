@@ -4,11 +4,12 @@ import { useContext } from "react";
 
 const AdminPanel = () => {
   const ctx = useContext(Context);
+
   return (
     <>
-      <Footer show={ctx.isVisible}>
+      <Footer show={ctx.footer}>
+        <button onClick={ctx.subjectFormVisibilityHandler}>Add Subject</button>
         <button>Add Grade</button>
-        <button>Edit Grade</button>
         <button>Delete Grade</button>
       </Footer>
     </>
@@ -16,8 +17,6 @@ const AdminPanel = () => {
 };
 
 const Footer = styled.footer`
-  position: absolute;
-  bottom: 0;
   width: 100%;
   height: 5rem;
   background-color: rgb(247, 240, 231);
@@ -26,7 +25,9 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: space-around;
   transform: ${({ show }) => (show ? "translateY(0%)" : "translateY(100%)")};
+
   transition: all 0.3s ease;
+  margin-top: auto;
 
   button {
     padding: 0.6rem;
