@@ -8,8 +8,8 @@ namespace OnlineClassDiaryWebAPI.MappingProfiles
     {
         public MappingProfile()
         {
-            CreateMap<Grade, GradeDto>();
-            CreateMap<GradeDto, Grade>();
+            CreateMap<Grade, GradeDto>()
+                .ForMember(m => m.Subject, c => c.MapFrom(s => s.Subject.Name));
             CreateMap<Subject, SubjectDto>();
             CreateMap<SubjectDto, Subject>();
         }
