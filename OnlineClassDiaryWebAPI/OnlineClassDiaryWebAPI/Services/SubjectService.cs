@@ -27,10 +27,21 @@ namespace OnlineClassDiaryWebAPI.Services
             return true;
         }
 
+        public bool DeleteSubject(string name)
+        {
+            var subject = _dbContext.Subjects.FirstOrDefault(s => s.Name == name);
+            if (subject == null)
+                return false;
+            _dbContext.Subjects.Remove(subject);
+            _dbContext.SaveChanges();
+            return true;
+        }
+
         public List<SubjectDto> GetSubjects()
         {
             var subjects = _mapper.Map<List<SubjectDto>>(_dbContext.Subjects.ToList());
             return subjects;
         }
+
     }
 }

@@ -28,6 +28,15 @@ namespace OnlineClassDiaryWebAPI.Controllers
             _subjectService.CreateSubject(name);
             return Ok();
         }
+
+        [HttpDelete("deletesubject")]
+        public ActionResult DeleteSubject([FromForm] string name)
+        {
+            var result = _subjectService.DeleteSubject(name);
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
     }
 }
 

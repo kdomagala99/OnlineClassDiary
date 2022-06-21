@@ -7,5 +7,6 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
     {
         public bool CreateSubject(string name);
         public List<SubjectDto> GetSubjects();
+        bool DeleteSubject(string name);
     }
 }
