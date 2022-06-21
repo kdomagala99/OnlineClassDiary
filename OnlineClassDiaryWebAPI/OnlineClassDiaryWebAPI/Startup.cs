@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,22 +35,16 @@ namespace OnlineClassDiaryWebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineClassDiaryWebAPI", Version = "v1" });
             });
-
-            services.AddScoped<IAttendanceService, AttendanceService>();
-            services.AddScoped<IClassService, ClassService>();
-            services.AddScoped<IGradeService, GradeService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<ISemesterService, SemesterService>();
-            services.AddScoped<IStatusService, StatusService>();
-            services.AddScoped<ISubjectService, SubjectService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddDbContext<OnlineClassDiaryDbContext>();
-            services.AddScoped<OnlineClassDiaryDbSeeder>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<DbSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, OnlineClassDiaryDbSeeder seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DbSeeder seeder)
         {
             seeder.Seed();
             if (env.IsDevelopment())

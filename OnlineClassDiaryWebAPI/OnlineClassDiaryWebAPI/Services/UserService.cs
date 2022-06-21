@@ -1,72 +1,39 @@
-﻿using AutoMapper;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineClassDiaryWebAPI.Database;
-using OnlineClassDiaryWebAPI.Dtos;
-using OnlineClassDiaryWebAPI.Entities;
+using OnlineClassDiaryWebAPI.Entities.Dtos;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineClassDiaryWebAPI.Services
 {
     public class UserService : IUserService
     {
-        private readonly OnlineClassDiaryDbContext _dbContext;
-        private readonly IMapper _mapper;
-
-        public UserService(OnlineClassDiaryDbContext dbContext, IMapper mapper)
+        private OnlineClassDiaryDbContext _dbContext;
+        public UserService(OnlineClassDiaryDbContext dbContext)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            _dbContext = dbContext; 
         }
 
-        public void CreateUser(User user)
+        public UserLoginDto GetUser(string email)
         {
-            _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
-        }
-
-        public void DeleteUser(string email)
-        {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
-            if (user != null)
-            {
-                _dbContext.Users.Remove(user);
-                _dbContext.SaveChanges();
-            }
-        }
-
-        public void EditUser(User user)
-        {
-            var userDb = _dbContext.Users.FirstOrDefault(u => u.PESEL.Equals(user.PESEL));
-            userDb = user;
-            _dbContext.SaveChanges();
-        }
-
-        public UserDto GetUser(string email)
-        {
-            var userDto = new UserDto();
-            var userDb = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
-            if (userDb == null)
-                return null;
-            userDto = _mapper.Map<UserDto>(userDb);
-            return userDto;
-        }
-
-        public List<UserDto> GetUsers()
-        {
-            var users = _mapper.Map<List<UserDto>>(_dbContext.Users.ToList());
-            return users;
-        }
-
-        public UserDto Login(string email, string password)
-        {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Email.Equals(email));
+            var user = _dbContext.Users.Include(u => u.Role).FirstOrDefault(u => u.Email == email);
             if (user == null)
                 return null;
-            if (user.PasswordHash != password)
-                return new UserDto();
+            UserLoginDto result = new UserLoginDto();
+            result.Surname = user.Surname;
+            result.Name = user.Name;
+            result.Role = user.Role.Name;
+            return result;
+        }
 
-            return _mapper.Map<UserDto>(user);
+        public bool LoginUser(string email, string password)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+                return false;
+            if (user.PasswordHash != password)
+                return false;
+            return true;
         }
     }
 }

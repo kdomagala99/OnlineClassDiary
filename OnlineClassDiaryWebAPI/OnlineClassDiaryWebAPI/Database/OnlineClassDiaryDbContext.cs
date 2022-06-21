@@ -5,7 +5,7 @@ namespace OnlineClassDiaryWebAPI.Database
 {
     public class OnlineClassDiaryDbContext : DbContext
     {
-        private readonly string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=OnlineClassDiaryDb;Trusted_Connection=True;";
+        private readonly string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=OnlineClassDiaryDb2;Trusted_Connection=True;";
 
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Class> Classes { get; set; }
@@ -49,10 +49,10 @@ namespace OnlineClassDiaryWebAPI.Database
 
             //semester
             modelBuilder.Entity<Semester>()
-                .Property(s => s.Date_Begin)
+                .Property(s => s.DateBegin)
                 .IsRequired();
             modelBuilder.Entity<Semester>()
-                .Property(s => s.Date_End)
+                .Property(s => s.DateEnd)
                 .IsRequired();
 
             //status
@@ -81,7 +81,7 @@ namespace OnlineClassDiaryWebAPI.Database
                 .IsRequired();
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Class)
-                .WithMany(u => u.Students_List);
+                .WithMany(u => u.StudentsList);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

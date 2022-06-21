@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineClassDiaryWebAPI.Dtos;
-using OnlineClassDiaryWebAPI.Entities;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Controllers
@@ -17,52 +15,22 @@ namespace OnlineClassDiaryWebAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet("getusers")]
-        public ActionResult GetUsers()
+        [HttpPost("login")]
+        public ActionResult LoginUser([FromForm]string email, [FromForm]string password)
         {
-            var result = _userService.GetUsers();
-            return Ok(result);
+            var loginStatus = _userService.LoginUser(email, password);
+            if (loginStatus)
+                return Ok();
+            return BadRequest();
         }
 
         [HttpGet("getuser/{email}")]
         public ActionResult GetUser(string email)
         {
-            var result = _userService.GetUser(email);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
-        }
-
-        [HttpPost("createuser")]
-        public ActionResult CreateUser([FromBody] User userDto)
-        {
-            _userService.CreateUser(userDto);
-            return Ok();
-        }
-
-        [HttpPut("edituser")]
-        public ActionResult EditUser([FromBody]User user)
-        {
-            _userService.EditUser(user);
-            return Ok();
-        }
-
-        [HttpDelete("deleteuser/{email}")]
-        public ActionResult DeleteUser(string email)
-        {
-            _userService.DeleteUser(email);
-            return Ok();
-        }
-
-        [HttpPost("login")]
-        public ActionResult Login([FromForm]string email, [FromForm]string password)
-        {
-            var logged = _userService.Login(email, password);
-            if (logged == null)
-                return NotFound();
-            if (logged.Email == null)
+            var user = _userService.GetUser(email);
+            if (user == null)
                 return BadRequest();
-            return Ok();
+            return Ok(user);
         }
     }
 }

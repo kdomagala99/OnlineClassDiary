@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineClassDiaryWebAPI.Dtos;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Controllers
@@ -13,7 +12,7 @@ namespace OnlineClassDiaryWebAPI.Controllers
 
         public SubjectController(ISubjectService subjectService)
         {
-            _subjectService = subjectService;  
+            _subjectService = subjectService;
         }
 
         [HttpGet("getsubjects")]
@@ -23,34 +22,12 @@ namespace OnlineClassDiaryWebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getsubject/{subjectname}")]
-        public ActionResult GetSubject(string subjectname)
-        {
-            var result = _subjectService.GetSubject(subjectname);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
-        }
-
         [HttpPost("createsubject")]
-        public ActionResult CreateSubject([FromForm] SubjectDto subjectDto)
+        public ActionResult CreateSubject([FromForm] string name)
         {
-            _subjectService.CreateSubject(subjectDto);
-            return Ok();
-        }
-
-        [HttpPut("editsubject/{subjectname}")]
-        public ActionResult EditSubject(string subjectname, [FromForm] SubjectDto subjectDto)
-        {
-            _subjectService.EditSubject(subjectname, subjectDto);
-            return Ok();
-        }
-
-        [HttpDelete("deletesubject/{subjectname}")]
-        public ActionResult DeleteSubject(string subjectname)
-        {
-            _subjectService.DeleteSubject(subjectname);
+            _subjectService.CreateSubject(name);
             return Ok();
         }
     }
 }
+

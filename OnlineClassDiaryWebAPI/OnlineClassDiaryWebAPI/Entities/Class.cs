@@ -6,8 +6,8 @@ namespace OnlineClassDiaryWebAPI.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual User Teacher { get; set; }
+        public User Teacher { get; set; }
+        public List<User> StudentsList { get; set; }
         public string Description { get; set; }
-        public virtual List<User> Students_List { get; set; }
     }
 }

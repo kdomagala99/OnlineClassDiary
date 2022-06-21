@@ -9,9 +9,8 @@ namespace OnlineClassDiaryWebAPI.Entities
         public decimal Value { get; set; }
         public virtual User Student { get; set; }
         public virtual User Teacher { get; set; }
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Semester Semester { get; set; }
+        public DateTime Date { get; set; }
     }
 }

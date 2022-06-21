@@ -1,49 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineClassDiaryWebAPI.Dtos;
 using OnlineClassDiaryWebAPI.Services.Interfaces;
 
 namespace OnlineClassDiaryWebAPI.Controllers
 {
-    [Route("api/gradecontroller")]
+    [Route("api/[controller]")]
     [ApiController]
     public class GradeController : Controller
     {
         private readonly IGradeService _gradeService;
-
         public GradeController(IGradeService gradeService)
         {
             _gradeService = gradeService;
         }
 
-        [HttpGet("getgrade/{id}")]
-        public ActionResult GetGrade(int id)
+        [HttpGet("studentgrades/{name}/{surname}")]
+        public ActionResult GetStudentGrades(string name, string surname)
         {
-            var result = _gradeService.GetGrade(id);
+            var result = _gradeService.GetStudentGrades(name, surname);
             if (result == null)
-                return NotFound();
+                return BadRequest();
             return Ok(result);
         }
 
-        [HttpPut("editgrade/{id}")]
-        public ActionResult EditGrade(int id, [FromForm] GradeDto gradeDto)
+        [HttpPost("addgradetostudent")]
+        public ActionResult AddGrade([FromForm]string name, [FromForm]string surname, [FromForm]decimal value, [FromForm]string subject, [FromForm]string teacherEmail)
         {
-            _gradeService.EditGrade(id, gradeDto);
-            return Ok();
+            var result = _gradeService.AddGrade(name, surname, value, subject, teacherEmail);
+            if (result)
+                return Ok();
+            return BadRequest();
         }
 
-        [HttpPost("creategrade")]
-        public ActionResult CreateGrade([FromForm] GradeDto gradeDto)
-        {
-            _gradeService.CreateGrade(gradeDto);
-            return Ok();
-        }
-
-        [HttpDelete("deletegrade/{id}")]
-        public ActionResult DeleteGrade(int id)
-        {
-            _gradeService.DeleteGrade(id);
-            return Ok();
-        }
     }
 }
