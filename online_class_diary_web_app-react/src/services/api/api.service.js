@@ -10,7 +10,6 @@ const api = () => {
 
   return {
     getSubjects: () => axios.get(`${baseUrl}/subjectcontroller/getsubjects`),
-    // getGrades: () => axios.get(`${baseUrl}/gradecontroller/getgrade`),
     addSubject: (subjectName) =>
       axios.post(
         `${baseUrl}/subjectcontroller/createsubject`,
@@ -19,21 +18,29 @@ const api = () => {
         },
         configAxios
       ),
-    // addGrades: (grades) =>
-    //   axios.post(
-    //     `${baseUrl}/gradecontroller/creategrade`,
-    //     {
-    //       name: grades,
-    //     },
-    //     configAxios
-    //   ),
-
-    getUsers: (email, password) =>
+    addGrade: (name, surname, subject, teacher, grade) =>
+      axios.post(
+        `${baseUrl}/Grade/addgradetostudent`,
+        {
+          name: name,
+          surname: surname,
+          value: grade,
+          subject: subject,
+          teacherEmail: teacher,
+        },
+        configAxios
+      ),
+    getGrades: (name, surname) =>
+      axios.get(`${baseUrl}/Grade/studentgrades/${name}/${surname}`),
+    checkLoginCredentials: (email, password) =>
       axios.post(
         `${baseUrl}/usercontroller/login`,
         { email, password },
         configAxios
       ),
+
+    getUserInfo: (email) =>
+      axios.get(`${baseUrl}/usercontroller/getuser/${email}`),
   };
 };
 

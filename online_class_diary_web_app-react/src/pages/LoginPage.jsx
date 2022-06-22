@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState, useEffect, useContext } from "react";
-import Context from "../store/context";
+import { useRef, useState, useEffect } from "react";
 import { apiService } from "../services/api/api.service";
 
 const LoginPage = () => {
-  const ctx = useContext(Context);
   const navigate = useNavigate();
 
   const userRef = useRef();
@@ -27,18 +25,21 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      await apiService.getUsers(email, password);
+      await apiService.checkLoginCredentials(email, password);
+      const user = await apiService.getUserInfo(email);
 
       const sessionObj = {
         email: email,
-        name: "admin",
-        surname: "admin",
-        role: "admin",
+        name: user.data.name,
+        surname: user.data.surname,
+        role: user.data.role,
       };
-      ctx.setTeacher(true);
-      ctx.setSession(sessionObj);
-      sessionStorage.setItem(sessionObj, JSON.stringify(sessionObj));
-      // console.log(sessionStorage.getItem(sessionObj.email));
+
+      console.log(sessionObj);
+
+      sessionStorage.setItem("sessionObj", JSON.stringify(sessionObj));
+      // const test = JSON.parse(sessionStorage.getItem("sessionObj"));
+      // console.log(test.email);
 
       setEmail("");
       setPassword("");
@@ -48,7 +49,7 @@ const LoginPage = () => {
       if (!err?.response) {
         setErrMsg("No server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg("Wrong Username or Password");
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {

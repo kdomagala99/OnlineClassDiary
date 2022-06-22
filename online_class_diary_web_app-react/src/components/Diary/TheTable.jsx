@@ -3,6 +3,11 @@ import Context from "../../store/context";
 import { useContext } from "react";
 import TableRow from "./TableRow";
 
+const countAvg = (item) => {
+  const avg = item.reduce((a, b) => a + b, 0) / item.length;
+  if (avg) return avg;
+};
+
 const TheTable = () => {
   const ctx = useContext(Context);
   return (
@@ -10,22 +15,26 @@ const TheTable = () => {
       <thead>
         <tr>
           <th>Subject</th>
-          <th colSpan={3}>Semester 1</th>
-          <th colSpan={3}>Semester 2</th>
+          <th colSpan={2}>Semester 1</th>
+          <th colSpan={2}>Semester 2</th>
         </tr>
         <tr>
           <th></th>
           <th>Grades</th>
           <th>Avg. 1</th>
-          <th>Final</th>
           <th>Grades</th>
           <th>Avg. 2</th>
-          <th>Final</th>
         </tr>
       </thead>
       <tbody>
         {ctx.storedSubjects.map((item) => {
-          return <TableRow name={item.name} />;
+          return (
+            <TableRow
+              name={item.name}
+              grades={item.grades.join(", ")}
+              avg={countAvg(item.grades)}
+            />
+          );
         })}
       </tbody>
     </Table>

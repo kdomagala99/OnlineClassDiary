@@ -1,13 +1,11 @@
-const TableRow = ({ name }) => {
+const TableRow = ({ name, grades, avg }) => {
   return (
     <tr>
       <td>{name}</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
-      <td>test</td>
+      <td></td>
+      <td></td>
+      <td>{grades}</td>
+      <td>{avg}</td>
     </tr>
   );
 };

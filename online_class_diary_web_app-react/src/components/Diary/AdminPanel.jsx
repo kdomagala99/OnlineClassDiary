@@ -9,7 +9,7 @@ const AdminPanel = () => {
     <>
       <Footer show={ctx.footer}>
         <button onClick={ctx.subjectFormVisibilityHandler}>Add Subject</button>
-        <button>Add Grade</button>
+        <button onClick={ctx.gradeFormVisibilityHandler}>Add Grade</button>
         <button>Delete Grade</button>
       </Footer>
     </>
