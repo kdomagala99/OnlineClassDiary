@@ -32,5 +32,21 @@ namespace OnlineClassDiaryWebAPI.Controllers
                 return BadRequest();
             return Ok(user);
         }
+#nullable enable
+        [HttpPost("adduser")]
+        public ActionResult AddUser([FromForm]string email, [FromForm] string password, [FromForm]string name, [FromForm] string surname, [FromForm] string role, [FromForm] string? childEmail)
+        {
+            var result = _userService.AddUser(email, password, name, surname, role, childEmail);
+            if (result)
+                return Ok();
+            return BadRequest();
+        }
+#nullable disable
+
+        [HttpGet("getallusers")]
+        public ActionResult GetAllUsers()
+        {
+            return Ok(_userService.GetAllUsers());
+        }
     }
 }

@@ -31,6 +31,10 @@ namespace OnlineClassDiaryWebAPI.Database
 
             //grade
             modelBuilder.Entity<Grade>()
+                .HasOne(g => g.Subject)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Grade>()
                 .Property(g => g.Name)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -66,7 +70,7 @@ namespace OnlineClassDiaryWebAPI.Database
                 .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
-
+                
             //user
             modelBuilder.Entity<User>()
                 .Property(u => u.Name)
