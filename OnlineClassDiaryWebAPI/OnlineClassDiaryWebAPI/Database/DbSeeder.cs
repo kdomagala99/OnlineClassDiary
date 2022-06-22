@@ -49,7 +49,31 @@ namespace OnlineClassDiaryWebAPI.Database
                 _dbContext.Semesters.AddRange(data);
                 _dbContext.SaveChanges();
             }
+
+            if (!_dbContext.Statuses.Any())
+            {
+                var data = GetStatuses();
+                _dbContext.Statuses.AddRange(data);
+                _dbContext.SaveChanges();
+            }
         }
+
+        private IEnumerable<Status> GetStatuses()
+        {
+            var list = new List<Status>()
+            {
+                new Status()
+                {
+                    Name = "Present"
+                },
+                new Status()
+                {
+                    Name = "Absent"
+                },
+            };
+            return list;
+        }
+
         private IEnumerable<Semester> GetSemesters()
         {
             var list = new List<Semester>()

@@ -39,6 +39,7 @@ namespace OnlineClassDiaryWebAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IGradeService, GradeService>();
             services.AddScoped<ISubjectService, SubjectService>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<DbSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
         }
