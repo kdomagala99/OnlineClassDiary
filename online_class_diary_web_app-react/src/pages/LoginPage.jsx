@@ -63,7 +63,8 @@ const LoginPage = () => {
   return (
     <Wrapper>
       <Form onSubmit={submitHandler}>
-        <h1>E - Diary</h1>
+        {/* <h1>E - Diary</h1> */}
+        <img src="assets/logo.png"></img>
         <DataFields>
           <div>
             <input
@@ -133,8 +134,13 @@ const Form = styled.form`
   justify-content: space-around;
   flex-direction: column;
 
-  h1 {
+  ${'' /* h1 {
     color: rgb(233, 186, 125);
+  } */}
+
+  img {
+    width: 14vw;
+    height: 22vh;
   }
 
   button {
