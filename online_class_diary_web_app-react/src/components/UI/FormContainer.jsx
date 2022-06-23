@@ -12,10 +12,11 @@ const Form = styled.form`
   width: 20rem;
   padding: 1.5rem;
   position: absolute;
-  top: 57%;
-  left: 10%;
+  top: 36%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   border-radius: 5px;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;

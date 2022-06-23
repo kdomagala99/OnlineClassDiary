@@ -1,22 +1,22 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const Logout = () => {
+const ContactButton = () => {
   const navigate = useNavigate();
 
-  const endSession = () => {
-    sessionStorage.clear();
-    navigate("/");
+  const contactPage = () => {
+    navigate("/login/diary/contact");
   };
-
-  return <LogoutButton onClick={endSession}>Logout</LogoutButton>;
+  return <Button onClick={contactPage}>Contact</Button>;
 };
 
-const LogoutButton = styled.button`
+export default ContactButton;
+
+const Button = styled.button`
   color: rgb(233, 186, 125);
   position: absolute;
   top: 5%;
-  left: 3%;
+  right: 3%;
   padding: 0.4rem 1rem;
   outline: none;
   background-color: transparent;
@@ -31,5 +31,3 @@ const LogoutButton = styled.button`
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.26);
   }
 `;
-
-export default Logout;

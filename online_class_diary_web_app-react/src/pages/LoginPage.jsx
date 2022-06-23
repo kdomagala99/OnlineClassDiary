@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { apiService } from "../services/api/api.service";
+import { useContext } from "react";
+import Context from "../store/context";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const ctx = useContext(Context);
 
   const userRef = useRef();
   const errRef = useRef();
@@ -35,14 +38,11 @@ const LoginPage = () => {
         role: user.data.role,
       };
 
-      console.log(sessionObj);
-
       sessionStorage.setItem("sessionObj", JSON.stringify(sessionObj));
-      // const test = JSON.parse(sessionStorage.getItem("sessionObj"));
-      // console.log(test.email);
 
       setEmail("");
       setPassword("");
+      ctx.reloadApp();
 
       navigate("/login/diary");
     } catch (err) {

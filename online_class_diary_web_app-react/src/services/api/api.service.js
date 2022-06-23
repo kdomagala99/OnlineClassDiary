@@ -41,6 +41,21 @@ const api = () => {
 
     getUserInfo: (email) =>
       axios.get(`${baseUrl}/usercontroller/getuser/${email}`),
+
+    addUser: (email, password, name, surname, role) =>
+      axios.post(
+        `${baseUrl}/usercontroller/adduser`,
+        {
+          email,
+          password,
+          name,
+          surname,
+          role,
+        },
+        configAxios
+      ),
+
+    getAllUsers: () => axios.get(`${baseUrl}/usercontroller/getallusers`),
   };
 };
 
