@@ -64,8 +64,8 @@ const LoginPage = () => {
   return (
     <Wrapper>
       <Form onSubmit={submitHandler}>
-        <h1>E - Diary</h1>
-        {/* <img src="assets/logo.png"></img> */}
+        {/* <h1>E - Diary</h1> */}
+        <img src="assets/logo.png" alt="logo"></img>
         <DataFields>
           <div>
             <input
@@ -105,7 +105,7 @@ const LoginPage = () => {
 
 const Error = styled.p`
   position: absolute;
-  bottom: 28%;
+  bottom: 20%;
   background-color: lightpink;
   color: firebrick;
   font-weight: bold;
@@ -132,16 +132,16 @@ const Form = styled.form`
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: column;
 
-  h1 {
+  /* h1 {
     color: rgb(233, 186, 125);
-  }
+  } */
 
   img {
-    width: 14vw;
-    height: 22vh;
+    height: 13rem;
+    width: 16rem;
   }
 
   button {
