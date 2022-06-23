@@ -7,5 +7,6 @@ namespace OnlineClassDiaryWebAPI.Services.Interfaces
     {
         public List<List<GradeDto>> GetStudentGrades(string name, string surname);
         public bool AddGrade(string imie, string nazwisko, decimal value, string subject, string email);
+        public void DeleteAllGrades();
     }
 }

@@ -24,13 +24,21 @@ namespace OnlineClassDiaryWebAPI.Controllers
         }
 
         [HttpPost("addgradetostudent")]
-        public ActionResult AddGrade([FromForm]string name, [FromForm]string surname, [FromForm]decimal value, [FromForm]string subject, [FromForm]string teacherEmail)
+        public ActionResult AddGrade([FromForm] string name, [FromForm] string surname, [FromForm] decimal value, [FromForm] string subject, [FromForm] string teacherEmail)
         {
             var result = _gradeService.AddGrade(name, surname, value, subject, teacherEmail);
             if (result)
                 return Ok();
             return BadRequest();
         }
+
+        [HttpDelete("deleteallgrades")]
+        public ActionResult DeleteGrades()
+        {
+            _gradeService.DeleteAllGrades();
+            return Ok();
+        }
+
 
     }
 }

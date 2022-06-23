@@ -1,4 +1,6 @@
-﻿namespace OnlineClassDiaryWebAPI.Entities
+﻿using System;
+
+namespace OnlineClassDiaryWebAPI.Entities
 {
     public class User
     {
@@ -12,6 +14,21 @@
 #nullable enable
         public virtual User? Child { get; set; }
         public virtual Class? Class { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is User user &&
+                   Id == user.Id &&
+                   Name == user.Name &&
+                   Surname == user.Surname &&
+                   Email == user.Email &&
+                   PESEL == user.PESEL;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Name, Surname, Email, PESEL);
+        }
 #nullable disable
     }
 }

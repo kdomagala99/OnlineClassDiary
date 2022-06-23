@@ -24,7 +24,7 @@ namespace OnlineClassDiaryWebAPI.Services
             User teacher = _dbContext.Users.FirstOrDefault(u => u.Email == email);
             if (teacher == null)
                 return false;
-            User student = _dbContext.Users.FirstOrDefault(u => u.Email == email);
+            User student = _dbContext.Users.FirstOrDefault(u => u.Name == imie && u.Surname == nazwisko);
             if (student == null)
                 return false;
             Grade grade = new Grade();
@@ -47,7 +47,10 @@ namespace OnlineClassDiaryWebAPI.Services
             List<List<GradeDto>> list = new List<List<GradeDto>>();
             Semester s1 = _dbContext.Semesters.FirstOrDefault(s => s.Name == "Winter");
             Semester s2 = _dbContext.Semesters.FirstOrDefault(s => s.Name == "Summer");
-            List<GradeDto> l1 = _mapper.Map<List<GradeDto>>(_dbContext.Grades.Where(g => g.Semester.Equals(s1))
+            User student = _dbContext.Users.FirstOrDefault(s => s.Name == name && s.Surname == surname);
+            if (student == null)
+                return null;
+            List<GradeDto> l1 = _mapper.Map<List<GradeDto>>(_dbContext.Grades.Where(g => g.Semester.Equals(s1) && g.Student == student)
                 .Select(g => new Grade
                 {
                     Value = g.Value,
@@ -58,7 +61,7 @@ namespace OnlineClassDiaryWebAPI.Services
                     Date = g.Date,
                     Subject = g.Subject
                 }).ToList());
-            List<GradeDto> l2 = _mapper.Map<List<GradeDto>>(_dbContext.Grades.Where(g => g.Semester.Equals(s2))
+            List<GradeDto> l2 = _mapper.Map<List<GradeDto>>(_dbContext.Grades.Where(g => g.Semester.Equals(s2) && g.Student == student)
                 .Select(g => new Grade
                 {
                     Value = g.Value,
@@ -76,6 +79,15 @@ namespace OnlineClassDiaryWebAPI.Services
             list.Add(l1);
             list.Add(l2);
             return list;
+        }
+
+        public void DeleteAllGrades()
+        {
+            foreach (var grade in _dbContext.Grades)
+            {
+                _dbContext.Remove(grade);
+            }
+            _dbContext.SaveChanges();
         }
     }
 }
