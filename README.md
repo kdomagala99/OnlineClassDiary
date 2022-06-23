@@ -1,3 +1,3 @@
 # OnlineClassDiary project
 
-Live demo: https://e-diary-web-app.netlify.app
+Live demo: https://e-diary-webapp.netlify.app
