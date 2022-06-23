@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = () => {
-  const baseUrl = "https://localhost:5001/api";
+  const baseUrl = "https://api-e-class-diary.azurewebsites.net/api";
   let configAxios = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -9,10 +9,10 @@ const api = () => {
   };
 
   return {
-    getSubjects: () => axios.get(`${baseUrl}/subjectcontroller/getsubjects`),
+    getSubjects: () => axios.get(`${baseUrl}/Subject/getsubjects`),
     addSubject: (subjectName) =>
       axios.post(
-        `${baseUrl}/subjectcontroller/createsubject`,
+        `${baseUrl}/Subject/createsubject`,
         {
           name: subjectName,
         },
@@ -33,18 +33,13 @@ const api = () => {
     getGrades: (name, surname) =>
       axios.get(`${baseUrl}/Grade/studentgrades/${name}/${surname}`),
     checkLoginCredentials: (email, password) =>
-      axios.post(
-        `${baseUrl}/usercontroller/login`,
-        { email, password },
-        configAxios
-      ),
+      axios.post(`${baseUrl}/User/login`, { email, password }, configAxios),
 
-    getUserInfo: (email) =>
-      axios.get(`${baseUrl}/usercontroller/getuser/${email}`),
+    getUserInfo: (email) => axios.get(`${baseUrl}/User/getuser/${email}`),
 
     addUser: (email, password, name, surname, role) =>
       axios.post(
-        `${baseUrl}/usercontroller/adduser`,
+        `${baseUrl}/User/adduser`,
         {
           email,
           password,
@@ -55,7 +50,7 @@ const api = () => {
         configAxios
       ),
 
-    getAllUsers: () => axios.get(`${baseUrl}/usercontroller/getallusers`),
+    getAllUsers: () => axios.get(`${baseUrl}/User/getallusers`),
   };
 };
 

@@ -24,7 +24,6 @@ export const ContextProvider = ({ children }) => {
   const [send, setSend] = useState(false);
   const [session, setSession] = useState({});
   const [gradeStatus, setGradeStatus] = useState("");
-  const [student, setStudent] = useState(false);
 
   const userInfo = JSON.parse(sessionStorage.getItem("sessionObj"));
 
