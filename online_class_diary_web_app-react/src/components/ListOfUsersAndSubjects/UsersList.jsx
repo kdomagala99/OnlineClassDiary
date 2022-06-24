@@ -9,7 +9,6 @@ const UsersList = () => {
         <li>Janusz Kowalski</li>
         <li>Izabela Wróblewska</li>
         <li>Łukasz Broda</li>
-        <li>Martin Squlimowski</li>
       </ul>
     </List>
   );
